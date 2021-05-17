@@ -1,6 +1,7 @@
 package sk.stuba.fei.uim.oop.Maze;
 
 import java.util.ArrayList;
+import java.util.Stack;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MazeClass {
@@ -13,7 +14,7 @@ public class MazeClass {
             {
                 if(k == 0)
                 {
-                    for(int j = 0; j < width; j++)
+                    for(int j = 0; j < weight; j++)
                     {
                         System.out.print("#");
                         if(maze[i][j].getWall()[0])
@@ -25,7 +26,7 @@ public class MazeClass {
                     System.out.print("\n");
                 }
                 else if(k == 1){
-                    for(int j = 0; j < width; j++)
+                    for(int j = 0; j < weight; j++)
                     {
                         if(maze[i][j].getWall()[1])
                             System.out.print("#");
@@ -40,7 +41,7 @@ public class MazeClass {
                     }
                     System.out.print("\n");
                 }else {
-                    /*for(int j = 0; j < width; j++)
+                    /*for(int j = 0; j < weight; j++)
                     {
                         System.out.print("#");
                         if(maze[i][j].getWall()[3])
@@ -53,14 +54,14 @@ public class MazeClass {
             }
         }
     }
-    public MazeClass(int height,int width)
+    public MazeClass(int height,int weight)
     {
-        this.width = width;
+        this.weight = weight;
         this.height = height;
-        maze = new CellClass[height][width];
+        maze = new CellClass[height][weight];
         for(int i = 0; i < height;i++)
         {
-            for(int j = 0; j < width;j++)
+            for(int j = 0; j < weight;j++)
             {
                 maze[i][j] = new CellClass(i,j);
             }
@@ -75,7 +76,7 @@ public class MazeClass {
     }
 
     public int getWeight() {
-        return width;
+        return weight;
     }
 
     public CellClass getCell(int i,int j)
@@ -84,11 +85,11 @@ public class MazeClass {
     }
     private CellClass[][] maze;
     private int height;
-    private int width;
+    private int weight;
     private void GenerateCellConnections()
     {
         for(int i = 0; i < height;i++) {
-            for (int j = 0; j < width; j++) {
+            for (int j = 0; j < weight; j++) {
                 //UpperCell
                 if(i - 1 < 0)
                 {
@@ -114,7 +115,7 @@ public class MazeClass {
                     maze[i][j].setLeftCell(maze[i][j-1]);
                 }
                 //rightCell
-                if(j + 1 >= width)
+                if(j + 1 >= weight)
                 {
                     maze[i][j].setRightCell(null);
                 }else
